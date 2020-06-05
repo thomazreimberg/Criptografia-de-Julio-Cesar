@@ -2,13 +2,12 @@ import express from 'express';
 const app = express();
 const fs = require('fs');
 const axios = require('axios').default;
-import {AxiosResponse} from 'axios';
 
 const token = require('./others/token.ts').token;
 const sha1 = require('./utils/sha1.ts');
 const decode3 = require('./utils/decode3.ts');
 
-interface Response {
+interface AxiosResponse {
     numero_casas : number
     token: string
     cifrado: string
@@ -17,9 +16,9 @@ interface Response {
 }
 
 app.get('/crypto', () => {
-    axios.get(
+    axios.get<AxiosResponse>(
         `https://api.codenation.dev/v1/challenge/dev-ps/generate-data?token=${token}`)
-        .then(response => {
+        .then( response => {
         let { numero_casas, cifrado, resumo_criptografico } = response.data;
         console.log(numero_casas);
         let message = decode3(cifrado, numero_casas);
