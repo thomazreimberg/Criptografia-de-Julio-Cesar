@@ -1,7 +1,7 @@
 import express from 'express';
 const app = express();
-const fs = require('fs');
-const axios = require('axios').default;
+import fs from 'fs';
+import axios from 'axios';
 
 const token = require('./others/token.ts').token;
 const sha1 = require('./utils/sha1.ts');
@@ -18,28 +18,27 @@ interface AxiosResponse {
 app.get('/crypto', () => {
     axios.get<AxiosResponse>(
         `https://api.codenation.dev/v1/challenge/dev-ps/generate-data?token=${token}`)
-        .then( response => {
+        .then( (response) => {
         let { numero_casas, cifrado, resumo_criptografico } = response.data;
-        console.log(numero_casas);
         let message = decode3(cifrado, numero_casas);
-        console.log('output: ' + message);
-        
         let resumo = sha1(message);
+        console.log('resumo: ' + resumo);
 
         const answer = {
             numero_casas,
             cifrado,
             decifrado: message,
-            resumo_criptografico: resumo,
+            resumo_criptografico: resumo
         };
-
-        console.log(answer);
-
-        fs.writeFile(__dirname + "/anser.json"), JSON.stringify(answer), (error: String) => {
-            console.log(error || 'Saved file.');
-        };
-        console.log(response);
+        saveFile(answer);
     });
 });
+
+function saveFile(answer: object) {
+        console.log(answer);
+        fs.writeFile(__dirname + "/others/answer.json", JSON.stringify(answer), (error) => {
+            console.log(error || "Saved file.");
+          });
+}
 
 app.listen(3333);

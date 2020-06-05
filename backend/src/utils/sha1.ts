@@ -1,9 +1,8 @@
-import {SHA1} from "crypto-js";
-
 function sha1(message: String) {
-
-    const generator = (SHA1(message.toString()));
-    return generator;
+    return require("crypto")
+    .createHash("sha1")
+    .update(message)
+    .digest("hex");
 }
 
 module.exports = sha1;
