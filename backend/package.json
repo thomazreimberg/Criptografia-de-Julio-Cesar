@@ -11,8 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "@types/crypto-js": "^3.1.47",
+    "axios": "^0.19.2",
     "crypto-js": "^4.0.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.6",
