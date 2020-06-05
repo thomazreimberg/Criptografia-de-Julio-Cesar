@@ -26,6 +26,7 @@ app.get('/crypto', () => {
 
         const answer = {
             numero_casas,
+            token,
             cifrado,
             decifrado: message,
             resumo_criptografico: resumo
