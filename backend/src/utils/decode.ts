@@ -8,7 +8,7 @@ let specialLettersPosition = new Array<number>();
 
 function alphaIndex(phrase: string, numberOfJumps : number) {
     let arrayLetters = convertPhrase(phrase);
-    separateLetters(phrase, numberOfJumps, arrayLetters);
+    separateLetters(numberOfJumps, arrayLetters);
 
     cryptoPhrase();
     verifyLenght(arrayLetters);
@@ -30,7 +30,7 @@ function convertPhrase(phrase: string) {
     return phrase.toUpperCase().split('');
 }
 
-function separateLetters(phrase: string, numberOfJumps : number, arrayLetters: Array<string>) {
+function separateLetters(numberOfJumps : number, arrayLetters: Array<string>) {
     let n = 0;
 
     arrayLetters.forEach(letter => {
