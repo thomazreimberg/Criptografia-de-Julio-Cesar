@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const token = require('./others/token.ts').token;
 const sha1 = require('./utils/sha1.ts');
-const decode3 = require('./utils/decode3.ts');
+const decode = require('./utils/decode.ts');
 
 interface AxiosResponse {
     numero_casas : number
@@ -19,8 +19,8 @@ app.get('/crypto', () => {
     axios.get<AxiosResponse>(
         `https://api.codenation.dev/v1/challenge/dev-ps/generate-data?token=${token}`)
         .then( (response) => {
-        let { numero_casas, cifrado, resumo_criptografico } = response.data;
-        let message = decode3(cifrado, numero_casas);
+        let { numero_casas, cifrado } = response.data;
+        let message = decode(cifrado, numero_casas);
         let resumo = sha1(message);
         console.log('resumo: ' + resumo);
 
@@ -42,4 +42,4 @@ function saveFile(answer: object) {
           });
 }
 
-app.listen(3333);
+app.listen(3334);
