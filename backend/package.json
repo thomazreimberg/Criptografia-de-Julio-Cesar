@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/crypto-js": "^3.1.47",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "crypto-js": "^4.0.0",
     "digest-js": "^0.3.0",
     "express": "^4.17.1",
